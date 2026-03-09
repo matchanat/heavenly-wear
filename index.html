@@ -1,0 +1,1403 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heavenly Wear - Elegant Hijab Collection</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#F8BBD9',
+            secondary: '#E8B4D4',
+            accent: '#A7C7E7',
+            soft: '#FDF2F8',
+            elegant: '#9B6B8E'
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'serif'],
+            body: ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; }
+    .gradient-bg { background: linear-gradient(135deg, #FDF2F8 0%, #E8F4FD 50%, #FDF2F8 100%); }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(155, 107, 142, 0.15); }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #9B6B8E; transition: width 0.3s; }
+    .nav-link:hover::after { width: 100%; }
+    .fade-in { animation: fadeIn 0.5s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .slide-in { animation: slideIn 0.4s ease-out; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    .pulse-btn { animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(167, 199, 231, 0.4); } 50% { box-shadow: 0 0 0 10px rgba(167, 199, 231, 0); } }
+    .video-container { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+    .video-item { scroll-snap-align: center; }
+    input[type="file"] { display: none; }
+    .custom-scrollbar::-webkit-scrollbar { height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #FDF2F8; border-radius: 10px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #E8B4D4; border-radius: 10px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-body gradient-bg overflow-auto">
+  <div id="app" class="min-h-full w-full"><!-- Navigation -->
+   <nav id="navbar" class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md shadow-sm z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex justify-between items-center h-16 md:h-20">
+      <div class="flex items-center cursor-pointer" onclick="navigateTo('home')"><span class="text-2xl md:text-3xl font-display font-bold text-elegant">✨ Heavenly Wear</span>
+      </div><!-- Desktop Menu -->
+      <div class="hidden md:flex items-center space-x-8"><a onclick="navigateTo('home')" class="nav-link text-gray-700 hover:text-elegant cursor-pointer font-medium">Beranda</a> <a onclick="navigateTo('catalog')" class="nav-link text-gray-700 hover:text-elegant cursor-pointer font-medium">Katalog</a> <a onclick="navigateTo('quiz')" class="nav-link text-gray-700 hover:text-elegant cursor-pointer font-medium">Quiz Rekomendasi</a> <a onclick="navigateTo('about')" class="nav-link text-gray-700 hover:text-elegant cursor-pointer font-medium">Tentang Hijab</a> <a onclick="navigateTo('tutorial')" class="nav-link text-gray-700 hover:text-elegant cursor-pointer font-medium">Tutorial</a> <a onclick="navigateTo('owner')" class="nav-link text-gray-700 hover:text-elegant cursor-pointer font-medium">👑 Owner</a>
+      </div>
+      <div class="flex items-center space-x-4"><button onclick="navigateTo('cart')" class="relative p-2 text-elegant hover:bg-primary/20 rounded-full transition">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg><span id="cart-count" class="absolute -top-1 -right-1 bg-elegant text-white text-xs w-5 h-5 rounded-full flex items-center justify-center hidden">0</span> </button> <!-- Mobile Menu Button --> <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-elegant">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg></button>
+      </div>
+     </div><!-- Mobile Menu -->
+     <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <div class="flex flex-col space-y-3"><a onclick="navigateTo('home'); toggleMobileMenu()" class="text-gray-700 hover:text-elegant cursor-pointer py-2 font-medium">Beranda</a> <a onclick="navigateTo('catalog'); toggleMobileMenu()" class="text-gray-700 hover:text-elegant cursor-pointer py-2 font-medium">Katalog</a> <a onclick="navigateTo('quiz'); toggleMobileMenu()" class="text-gray-700 hover:text-elegant cursor-pointer py-2 font-medium">Quiz Rekomendasi</a> <a onclick="navigateTo('about'); toggleMobileMenu()" class="text-gray-700 hover:text-elegant cursor-pointer py-2 font-medium">Tentang Hijab</a> <a onclick="navigateTo('tutorial'); toggleMobileMenu()" class="text-gray-700 hover:text-elegant cursor-pointer py-2 font-medium">Tutorial</a> <a onclick="navigateTo('owner'); toggleMobileMenu()" class="text-gray-700 hover:text-elegant cursor-pointer py-2 font-medium">👑 Owner Panel</a>
+      </div>
+     </div>
+    </div>
+   </nav><!-- Main Content Container -->
+   <main id="main-content" class="pt-20 md:pt-24 pb-16"><!-- HOME PAGE -->
+    <section id="page-home" class="page-section"><!-- Hero Section -->
+     <div class="relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+       <div class="text-center fade-in">
+        <h1 class="text-4xl md:text-6xl font-display font-bold text-elegant mb-6">Elegant Hijab for<br>
+         Every Woman</h1>
+        <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto font-light">Temukan koleksi hijab premium dengan kualitas terbaik dan desain yang elegan untuk menemani setiap momenmu</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center"><button onclick="navigateTo('catalog')" class="px-8 py-4 bg-elegant text-white rounded-full font-medium hover:bg-elegant/90 transition shadow-lg pulse-btn"> Lihat Koleksi ✨ </button> <button onclick="navigateTo('quiz')" class="px-8 py-4 bg-white text-elegant border-2 border-elegant rounded-full font-medium hover:bg-primary/20 transition"> Temukan Hijab Cocokmu 💕 </button>
+        </div>
+       </div>
+      </div><!-- Decorative Elements -->
+      <div class="absolute top-20 left-10 w-20 h-20 bg-primary/30 rounded-full blur-2xl"></div>
+      <div class="absolute bottom-20 right-10 w-32 h-32 bg-accent/30 rounded-full blur-2xl"></div>
+     </div><!-- Featured Products Preview -->
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h2 class="text-2xl md:text-3xl font-display font-semibold text-center text-elegant mb-10">Produk Unggulan</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+       <div onclick="showProductDetail('hijab-sport')" class="bg-white rounded-2xl p-4 shadow-md card-hover cursor-pointer">
+        <div class="aspect-square bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl mb-3 flex items-center justify-center overflow-hidden"><img src="image/hijab-sport.jpeg" alt="Hijab Sport" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🧕</span>';">
+        </div>
+        <h3 class="font-medium text-gray-800 text-sm md:text-base">Hijab Sport</h3>
+        <p class="text-elegant font-semibold">Rp 40.000</p>
+       </div>
+       <div onclick="showProductDetail('segiempat-voal')" class="bg-white rounded-2xl p-4 shadow-md card-hover cursor-pointer">
+        <div class="aspect-square bg-gradient-to-br from-secondary/20 to-primary/20 rounded-xl mb-3 flex items-center justify-center overflow-hidden"><img src="image/segiempat-voal.jpeg" alt="Hijab Segi Empat Voal" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>🧣</span>';">
+        </div>
+        <h3 class="font-medium text-gray-800 text-sm md:text-base">Segi Empat Voal</h3>
+        <p class="text-elegant font-semibold">Rp 35.000</p>
+       </div>
+       <div onclick="showProductDetail('pashmina-viscose')" class="bg-white rounded-2xl p-4 shadow-md card-hover cursor-pointer">
+        <div class="aspect-square bg-gradient-to-br from-accent/20 to-secondary/20 rounded-xl mb-3 flex items-center justify-center overflow-hidden"><img src="image/pashmina-viscose.jpeg" alt="Hijab Pashmina Viscose" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>✨</span>';">
+        </div>
+        <h3 class="font-medium text-gray-800 text-sm md:text-base">Pashmina Viscose</h3>
+        <p class="text-elegant font-semibold">Rp 45.000</p>
+       </div>
+       <div onclick="showProductDetail('pashmina-ceruty')" class="bg-white rounded-2xl p-4 shadow-md card-hover cursor-pointer">
+        <div class="aspect-square bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl mb-3 flex items-center justify-center overflow-hidden"><img src="image/pashmina-ceruty.jpeg" alt="Hijab Pashmina Ceruty" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-4xl\'>💎</span>';">
+        </div>
+        <h3 class="font-medium text-gray-800 text-sm md:text-base">Pashmina Ceruty</h3>
+        <p class="text-elegant font-semibold">Rp 42.000</p>
+       </div>
+      </div>
+     </div><!-- Social Media & Contact -->
+     <div class="bg-white/80 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+       <h3 class="text-xl font-display font-semibold text-elegant mb-6">Ikuti Kami</h3>
+       <div class="flex justify-center space-x-6 mb-8"><a href="https://instagram.com/heavenlywear" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:opacity-90 transition">
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+         </svg><span>Instagram</span> </a> <a href="https://tiktok.com/@heavenlywear" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 px-6 py-3 bg-black text-white rounded-full hover:opacity-90 transition">
+         <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
+         </svg><span>TikTok</span> </a>
+       </div><a href="https://wa.me/6281234567890?text=Halo%20Heavenly%20Wear,%20saya%20ingin%20konsultasi" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-8 py-4 bg-green-500 text-white rounded-full hover:bg-green-600 transition shadow-lg">
+        <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24">
+         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg><span class="font-medium">Konsultasi via WhatsApp</span> </a>
+      </div>
+     </div>
+    </section><!-- CATALOG PAGE -->
+    <section id="page-catalog" class="page-section hidden">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-elegant text-center mb-4">Katalog Hijab</h1>
+      <p class="text-gray-600 text-center mb-10">Pilih hijab favorit Anda dari koleksi premium kami</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"><!-- Hijab Sport -->
+       <div onclick="showProductDetail('hijab-sport')" class="bg-white rounded-3xl overflow-hidden shadow-lg card-hover cursor-pointer">
+        <div class="aspect-square bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center overflow-hidden"><img src="image/hijab-sport.jpeg" alt="Hijab Sport" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-6xl\'>🧕</span>';">
+        </div>
+        <div class="p-5">
+         <h3 class="font-display font-semibold text-lg text-gray-800 mb-2">Hijab Sport</h3>
+         <p class="text-gray-500 text-sm mb-3">Nyaman untuk aktivitas olahraga</p>
+         <div class="flex justify-between items-center"><span class="text-xl font-bold text-elegant">Rp 40.000</span> <span class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Tersedia</span>
+         </div>
+        </div>
+       </div><!-- Segi Empat Voal -->
+       <div onclick="showProductDetail('segiempat-voal')" class="bg-white rounded-3xl overflow-hidden shadow-lg card-hover cursor-pointer">
+        <div class="aspect-square bg-gradient-to-br from-secondary/30 to-primary/30 flex items-center justify-center overflow-hidden"><img src="image/segiempat-voal.jpeg" alt="Hijab Segi Empat Voal" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-6xl\'>🧣</span>';">
+        </div>
+        <div class="p-5">
+         <h3 class="font-display font-semibold text-lg text-gray-800 mb-2">Segi Empat Voal</h3>
+         <p class="text-gray-500 text-sm mb-3">Bahan voal premium lembut</p>
+         <div class="flex justify-between items-center"><span class="text-xl font-bold text-elegant">Rp 35.000</span> <span class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Tersedia</span>
+         </div>
+        </div>
+       </div><!-- Pashmina Viscose -->
+       <div onclick="showProductDetail('pashmina-viscose')" class="bg-white rounded-3xl overflow-hidden shadow-lg card-hover cursor-pointer">
+        <div class="aspect-square bg-gradient-to-br from-accent/30 to-secondary/30 flex items-center justify-center overflow-hidden"><img src="image/pashmina-viscose.jpeg" alt="Hijab Pashmina Viscose" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-6xl\'>✨</span>';">
+        </div>
+        <div class="p-5">
+         <h3 class="font-display font-semibold text-lg text-gray-800 mb-2">Pashmina Viscose</h3>
+         <p class="text-gray-500 text-sm mb-3">Jatuh sempurna, mudah dibentuk</p>
+         <div class="flex justify-between items-center"><span class="text-xl font-bold text-elegant">Rp 45.000</span> <span class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Tersedia</span>
+         </div>
+        </div>
+       </div><!-- Pashmina Ceruty -->
+       <div onclick="showProductDetail('pashmina-ceruty')" class="bg-white rounded-3xl overflow-hidden shadow-lg card-hover cursor-pointer">
+        <div class="aspect-square bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center overflow-hidden"><img src="image/pashmina-ceruty.jpeg" alt="Hijab Pashmina Ceruty" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-6xl\'>💎</span>';">
+        </div>
+        <div class="p-5">
+         <h3 class="font-display font-semibold text-lg text-gray-800 mb-2">Pashmina Ceruty</h3>
+         <p class="text-gray-500 text-sm mb-3">Elegan untuk acara formal</p>
+         <div class="flex justify-between items-center"><span class="text-xl font-bold text-elegant">Rp 42.000</span> <span class="text-xs bg-green-100 text-green-600 px-2 py-1 rounded-full">Tersedia</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- PRODUCT DETAIL PAGE -->
+    <section id="page-product-detail" class="page-section hidden">
+     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"><button onclick="navigateTo('catalog')" class="flex items-center text-elegant mb-6 hover:underline">
+       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+       </svg> Kembali ke Katalog </button>
+      <div class="grid md:grid-cols-2 gap-8 lg:gap-12"><!-- Product Image -->
+       <div class="bg-white rounded-3xl p-6 shadow-lg">
+        <div id="product-image-container" class="aspect-square bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl flex items-center justify-center overflow-hidden"><span class="text-8xl">🧕</span>
+        </div>
+       </div><!-- Product Info -->
+       <div class="fade-in">
+        <h1 id="product-title" class="text-3xl md:text-4xl font-display font-bold text-gray-800 mb-4">Nama Produk</h1>
+        <p id="product-price" class="text-3xl font-bold text-elegant mb-6">Rp 0</p>
+        <div class="mb-6">
+         <h3 class="font-semibold text-gray-700 mb-3">Deskripsi Produk:</h3>
+         <p id="product-description" class="text-gray-600 leading-relaxed">Deskripsi produk akan muncul di sini.</p>
+        </div>
+        <div class="mb-6">
+         <h3 class="font-semibold text-gray-700 mb-3">Pilih Warna:</h3>
+         <div id="color-options" class="flex flex-wrap gap-3"><!-- Colors will be populated dynamically -->
+         </div>
+        </div>
+        <div class="mb-6">
+         <h3 class="font-semibold text-gray-700 mb-3">Jumlah:</h3>
+         <div class="flex items-center space-x-4"><button onclick="decreaseQuantity()" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition text-xl font-bold">−</button> <span id="quantity-display" class="text-2xl font-semibold w-12 text-center">1</span> <button onclick="increaseQuantity()" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition text-xl font-bold">+</button>
+         </div>
+        </div>
+        <div id="stock-info" class="mb-6 p-4 bg-green-50 rounded-xl">
+         <p class="text-green-600 font-medium">✓ Stok tersedia: <span id="stock-count">0</span> pcs</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4"><button onclick="addToCart()" class="flex-1 px-8 py-4 bg-elegant text-white rounded-full font-medium hover:bg-elegant/90 transition shadow-lg"> 🛒 Tambah ke Keranjang </button> <button onclick="buyNow()" class="flex-1 px-8 py-4 bg-accent text-white rounded-full font-medium hover:bg-accent/90 transition shadow-lg"> ⚡ Beli Sekarang </button>
+        </div><!-- Customer Reviews -->
+        <div class="mt-10">
+         <h3 class="text-xl font-display font-semibold text-gray-800 mb-4">💬 Ulasan Pelanggan</h3>
+         <div id="product-reviews" class="space-y-4"><!-- Reviews will be populated dynamically -->
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- QUIZ PAGE -->
+    <section id="page-quiz" class="page-section hidden">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-elegant text-center mb-4">Quiz Rekomendasi Hijab</h1>
+      <p class="text-gray-600 text-center mb-10">Temukan hijab dan warna yang paling cocok untukmu!</p><!-- Quiz Options -->
+      <div class="grid md:grid-cols-3 gap-6 mb-10"><button onclick="showQuiz('undertone')" class="bg-white p-8 rounded-3xl shadow-lg card-hover text-center">
+        <div class="text-5xl mb-4">
+         🎨
+        </div><h3 class="font-display font-semibold text-lg text-gray-800 mb-2">Quiz Undertone</h3><p class="text-gray-500 text-sm">Temukan warna yang cocok berdasarkan undertone kulitmu</p></button> <button onclick="showQuiz('face-shape')" class="bg-white p-8 rounded-3xl shadow-lg card-hover text-center">
+        <div class="text-5xl mb-4">
+         👤
+        </div><h3 class="font-display font-semibold text-lg text-gray-800 mb-2">Quiz Bentuk Wajah</h3><p class="text-gray-500 text-sm">Temukan jenis hijab yang cocok dengan bentuk wajahmu</p></button> <button onclick="showQuiz('photo-analysis')" class="bg-white p-8 rounded-3xl shadow-lg card-hover text-center">
+        <div class="text-5xl mb-4">
+         📸
+        </div><h3 class="font-display font-semibold text-lg text-gray-800 mb-2">Analisis Foto</h3><p class="text-gray-500 text-sm">Upload foto untuk rekomendasi otomatis</p></button>
+      </div><!-- Undertone Quiz -->
+      <div id="quiz-undertone" class="quiz-container hidden bg-white rounded-3xl p-8 shadow-lg fade-in">
+       <h2 class="text-2xl font-display font-semibold text-elegant mb-6">🎨 Quiz Undertone Kulit</h2>
+       <div id="undertone-questions">
+        <div class="quiz-step" data-step="1">
+         <p class="text-lg font-medium text-gray-700 mb-4">1. Warna urat nadi di pergelangan tanganmu terlihat seperti apa?</p>
+         <div class="space-y-3"><button onclick="selectUndertone(1, 'warm')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> 🟢 Kehijauan (Green) </button> <button onclick="selectUndertone(1, 'cool')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> 🔵 Kebiruan/Keunguan (Blue/Purple) </button> <button onclick="selectUndertone(1, 'neutral')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> 🟢🔵 Campuran keduanya </button>
+         </div>
+        </div>
+        <div class="quiz-step hidden" data-step="2">
+         <p class="text-lg font-medium text-gray-700 mb-4">2. Perhiasan apa yang lebih cocok di kulitmu?</p>
+         <div class="space-y-3"><button onclick="selectUndertone(2, 'warm')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> 🥇 Emas (Gold) </button> <button onclick="selectUndertone(2, 'cool')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> 🥈 Perak (Silver) </button> <button onclick="selectUndertone(2, 'neutral')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> ✨ Keduanya cocok </button>
+         </div>
+        </div>
+        <div class="quiz-step hidden" data-step="3">
+         <p class="text-lg font-medium text-gray-700 mb-4">3. Bagaimana reaksi kulitmu saat terkena sinar matahari?</p>
+         <div class="space-y-3"><button onclick="selectUndertone(3, 'warm')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> ☀️ Mudah tan/coklat, jarang terbakar </button> <button onclick="selectUndertone(3, 'cool')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> 🔥 Mudah terbakar, susah tan </button> <button onclick="selectUndertone(3, 'neutral')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> 🌤️ Kadang terbakar dulu, lalu tan </button>
+         </div>
+        </div>
+       </div>
+       <div id="undertone-result" class="hidden mt-6 p-6 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl">
+        <h3 class="text-xl font-display font-semibold text-elegant mb-4">Hasil Analisis Undertone:</h3>
+        <div id="undertone-result-content"></div>
+       </div>
+      </div><!-- Face Shape Quiz -->
+      <div id="quiz-face-shape" class="quiz-container hidden bg-white rounded-3xl p-8 shadow-lg fade-in">
+       <h2 class="text-2xl font-display font-semibold text-elegant mb-6">👤 Quiz Bentuk Wajah</h2>
+       <div id="face-questions">
+        <div class="quiz-step" data-step="1">
+         <p class="text-lg font-medium text-gray-700 mb-4">1. Bagaimana bentuk dahi dan rahangmu?</p>
+         <div class="space-y-3"><button onclick="selectFaceShape(1, 'oval')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> 🥚 Dahi sedikit lebih lebar dari rahang, dengan dagu membulat </button> <button onclick="selectFaceShape(1, 'round')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> 🔵 Dahi dan rahang hampir sama lebar, pipi terlihat penuh </button> <button onclick="selectFaceShape(1, 'square')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> ⬜ Dahi, tulang pipi, dan rahang sama lebar dengan sudut tegas </button> <button onclick="selectFaceShape(1, 'heart')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> 💗 Dahi lebar dengan dagu runcing </button> <button onclick="selectFaceShape(1, 'oblong')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> 📏 Wajah panjang dengan dahi, pipi, rahang hampir sama lebar </button>
+         </div>
+        </div>
+        <div class="quiz-step hidden" data-step="2">
+         <p class="text-lg font-medium text-gray-700 mb-4">2. Bagaimana bentuk dagumu?</p>
+         <div class="space-y-3"><button onclick="selectFaceShape(2, 'oval')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> Membulat dengan lembut </button> <button onclick="selectFaceShape(2, 'round')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> Sangat bulat dan pendek </button> <button onclick="selectFaceShape(2, 'square')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> Kotak dan tegas </button> <button onclick="selectFaceShape(2, 'heart')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> Runcing dan lancip </button> <button onclick="selectFaceShape(2, 'oblong')" class="w-full p-4 text-left bg-gray-50 rounded-xl hover:bg-primary/20 transition border-2 border-transparent hover:border-elegant"> Panjang dan sempit </button>
+         </div>
+        </div>
+       </div>
+       <div id="face-result" class="hidden mt-6 p-6 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl">
+        <h3 class="text-xl font-display font-semibold text-elegant mb-4">Hasil Analisis Bentuk Wajah:</h3>
+        <div id="face-result-content"></div>
+       </div>
+      </div><!-- Photo Analysis -->
+      <div id="quiz-photo-analysis" class="quiz-container hidden bg-white rounded-3xl p-8 shadow-lg fade-in">
+       <h2 class="text-2xl font-display font-semibold text-elegant mb-6">📸 Analisis Foto Wajah</h2>
+       <p class="text-gray-600 mb-6">Upload foto wajahmu untuk mendapatkan rekomendasi produk otomatis berdasarkan undertone dan bentuk wajah.</p>
+       <div class="flex flex-col sm:flex-row gap-4 mb-6"><label class="flex-1 cursor-pointer"> <input type="file" accept="image/*" onchange="handlePhotoUpload(event)" id="photo-gallery">
+         <div class="p-6 bg-gray-50 rounded-2xl text-center hover:bg-primary/20 transition border-2 border-dashed border-gray-300 hover:border-elegant">
+          <div class="text-4xl mb-2">
+           🖼️
+          </div>
+          <p class="font-medium text-gray-700">Pilih dari Galeri</p>
+         </div></label> <label class="flex-1 cursor-pointer"> <input type="file" accept="image/*" capture="user" onchange="handlePhotoUpload(event)" id="photo-camera">
+         <div class="p-6 bg-gray-50 rounded-2xl text-center hover:bg-primary/20 transition border-2 border-dashed border-gray-300 hover:border-elegant">
+          <div class="text-4xl mb-2">
+           📷
+          </div>
+          <p class="font-medium text-gray-700">Ambil Foto</p>
+         </div></label>
+       </div>
+       <div id="photo-preview" class="hidden mb-6">
+        <div class="w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-elegant shadow-lg"><img id="preview-image" class="w-full h-full object-cover" alt="Preview">
+        </div>
+       </div>
+       <div id="photo-analyzing" class="hidden text-center py-8">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-elegant border-t-transparent mb-4"></div>
+        <p class="text-gray-600">Menganalisis foto...</p>
+       </div>
+       <div id="photo-result" class="hidden mt-6 p-6 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl">
+        <h3 class="text-xl font-display font-semibold text-elegant mb-4">Hasil Analisis:</h3>
+        <div id="photo-result-content"></div>
+       </div>
+      </div>
+     </div>
+    </section><!-- ABOUT HIJAB PAGE -->
+    <section id="page-about" class="page-section hidden">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-elegant text-center mb-10">Tentang Hijab</h1><!-- Arti Hijab -->
+      <div class="bg-white rounded-3xl p-8 shadow-lg mb-8 fade-in">
+       <div class="text-center mb-6"><span class="text-6xl">🌙</span>
+       </div>
+       <h2 class="text-2xl font-display font-semibold text-elegant mb-4 text-center">Apa Itu Hijab?</h2>
+       <p class="text-gray-600 leading-relaxed mb-4">Hijab berasal dari bahasa Arab <em>"حجاب"</em> yang berarti penghalang atau penutup. Dalam konteks Islam, hijab merujuk pada pakaian yang menutup aurat wanita sebagai bentuk ketaatan kepada Allah SWT.</p>
+       <p class="text-gray-600 leading-relaxed mb-4">Hijab bukan sekadar penutup kepala, melainkan simbol identitas, kesopanan, dan keanggunan seorang muslimah. Mengenakan hijab adalah bentuk ibadah yang menunjukkan keimanan dan ketaqwaan.</p>
+       <div class="bg-primary/10 p-4 rounded-xl mt-4">
+        <p class="text-elegant italic text-center">"Dan katakanlah kepada para perempuan yang beriman, agar mereka menjaga pandangannya, dan memelihara kemaluannya, dan janganlah menampakkan perhiasannya (auratnya), kecuali yang (biasa) terlihat."</p>
+        <p class="text-sm text-gray-500 text-center mt-2">- QS. An-Nur: 31</p>
+       </div>
+      </div><!-- Jenis-jenis Hijab -->
+      <div class="bg-white rounded-3xl p-8 shadow-lg mb-8 fade-in">
+       <h2 class="text-2xl font-display font-semibold text-elegant mb-6 text-center">📚 Jenis-Jenis Hijab</h2>
+       <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-5 bg-gray-50 rounded-2xl">
+         <h3 class="font-semibold text-gray-800 mb-2">🧣 Hijab Segi Empat</h3>
+         <p class="text-gray-600 text-sm">Berbentuk persegi dengan berbagai ukuran. Cocok untuk gaya simple hingga formal. Bahan populer: voal, paris, organza.</p>
+        </div>
+        <div class="p-5 bg-gray-50 rounded-2xl">
+         <h3 class="font-semibold text-gray-800 mb-2">✨ Pashmina</h3>
+         <p class="text-gray-600 text-sm">Berbentuk persegi panjang, sangat versatile. Bisa dibentuk berbagai style. Bahan: viscose, diamond, ceruty.</p>
+        </div>
+        <div class="p-5 bg-gray-50 rounded-2xl">
+         <h3 class="font-semibold text-gray-800 mb-2">🎀 Hijab Instan</h3>
+         <p class="text-gray-600 text-sm">Sudah jadi dan tinggal pakai. Praktis untuk aktivitas cepat. Ada yang bergo dan pet antem.</p>
+        </div>
+        <div class="p-5 bg-gray-50 rounded-2xl">
+         <h3 class="font-semibold text-gray-800 mb-2">🏃‍♀️ Hijab Sport</h3>
+         <p class="text-gray-600 text-sm">Dirancang khusus untuk olahraga. Bahan breathable, quick dry, dan tetap menutup aurat.</p>
+        </div>
+        <div class="p-5 bg-gray-50 rounded-2xl">
+         <h3 class="font-semibold text-gray-800 mb-2">👑 Khimar</h3>
+         <p class="text-gray-600 text-sm">Hijab panjang yang menutup sampai dada atau pinggang. Cocok untuk yang ingin lebih syar'i.</p>
+        </div>
+        <div class="p-5 bg-gray-50 rounded-2xl">
+         <h3 class="font-semibold text-gray-800 mb-2">💫 Turban</h3>
+         <p class="text-gray-600 text-sm">Style modern yang dililitkan di kepala. Cocok untuk acara kasual dan semi-formal.</p>
+        </div>
+       </div>
+      </div><!-- Ajakan Berhijab -->
+      <div class="bg-gradient-to-r from-elegant to-accent rounded-3xl p-8 shadow-lg text-white text-center fade-in"><span class="text-6xl mb-4 block">💕</span>
+       <h2 class="text-2xl font-display font-semibold mb-4">Yuk, Mulai Berhijab!</h2>
+       <p class="mb-6 opacity-90">Setiap perjalanan dimulai dari langkah pertama. Tidak perlu sempurna, yang penting mulai. Hijab adalah bentuk cinta kita kepada Allah dan diri sendiri.</p>
+       <p class="mb-6 opacity-90">Berhijab tidak membatasi, justru membebaskan. Kamu tetap bisa tampil cantik, modis, dan percaya diri. Mari bersama menebar kebaikan dan inspirasi!</p><button onclick="navigateTo('catalog')" class="px-8 py-4 bg-white text-elegant rounded-full font-medium hover:bg-gray-100 transition shadow-lg"> Mulai Pilih Hijabmu ✨ </button>
+      </div>
+     </div>
+    </section><!-- TUTORIAL PAGE -->
+    <section id="page-tutorial" class="page-section hidden">
+     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-elegant text-center mb-4">Tutorial Hijab</h1>
+      <p class="text-gray-600 text-center mb-10">Pelajari berbagai style hijab cantik dari video tutorial berikut</p>
+      <div class="video-container flex gap-6 overflow-x-auto pb-6 custom-scrollbar">
+       <div class="video-item flex-shrink-0 w-80 md:w-96 bg-white rounded-3xl overflow-hidden shadow-lg">
+        <div class="aspect-video"><iframe class="w-full h-full" src="https://www.youtube.com/embed/H2ev9kX3CYA" title="Tutorial Hijab 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="p-5">
+         <h3 class="font-display font-semibold text-gray-800 mb-2">Tutorial Hijab Pashmina</h3>
+         <p class="text-gray-500 text-sm">Style simple dan elegan untuk sehari-hari</p>
+        </div>
+       </div>
+       <div class="video-item flex-shrink-0 w-80 md:w-96 bg-white rounded-3xl overflow-hidden shadow-lg">
+        <div class="aspect-video"><iframe class="w-full h-full" src="https://www.youtube.com/embed/-SkMvc0muLY" title="Tutorial Hijab 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="p-5">
+         <h3 class="font-display font-semibold text-gray-800 mb-2">Tutorial Hijab Segi Empat</h3>
+         <p class="text-gray-500 text-sm">Berbagai gaya dengan hijab segi empat</p>
+        </div>
+       </div>
+       <div class="video-item flex-shrink-0 w-80 md:w-96 bg-white rounded-3xl overflow-hidden shadow-lg">
+        <div class="aspect-video"><iframe class="w-full h-full" src="https://www.youtube.com/embed/WzKlSFJDISA" title="Tutorial Hijab 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="p-5">
+         <h3 class="font-display font-semibold text-gray-800 mb-2">Tutorial Hijab untuk Pesta</h3>
+         <p class="text-gray-500 text-sm">Tampil cantik di acara spesial</p>
+        </div>
+       </div>
+      </div>
+      <p class="text-center text-gray-500 mt-4">← Geser untuk melihat video lainnya →</p>
+     </div>
+    </section><!-- CART PAGE -->
+    <section id="page-cart" class="page-section hidden">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-elegant text-center mb-10">🛒 Keranjang Belanja</h1>
+      <div id="cart-empty" class="text-center py-16 hidden"><span class="text-8xl mb-6 block">🛒</span>
+       <h3 class="text-xl font-display font-semibold text-gray-600 mb-4">Keranjang masih kosong</h3>
+       <p class="text-gray-500 mb-6">Yuk, mulai belanja hijab cantik!</p><button onclick="navigateTo('catalog')" class="px-8 py-3 bg-elegant text-white rounded-full font-medium hover:bg-elegant/90 transition"> Lihat Katalog </button>
+      </div>
+      <div id="cart-items" class="space-y-4 mb-8"><!-- Cart items will be populated here -->
+      </div>
+      <div id="cart-summary" class="hidden bg-white rounded-3xl p-6 shadow-lg">
+       <div class="flex justify-between items-center mb-4"><span class="text-gray-600">Subtotal:</span> <span id="cart-subtotal" class="font-semibold text-lg">Rp 0</span>
+       </div><button onclick="checkoutSelected()" class="w-full py-4 bg-elegant text-white rounded-full font-medium hover:bg-elegant/90 transition shadow-lg"> Checkout Produk Terpilih </button>
+      </div>
+     </div>
+    </section><!-- PAYMENT PAGE -->
+    <section id="page-payment" class="page-section hidden">
+     <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8"><button onclick="navigateBack()" class="flex items-center text-elegant mb-6 hover:underline">
+       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+       </svg> Kembali </button>
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-elegant text-center mb-8">💳 Pembayaran</h1>
+      <div class="bg-white rounded-3xl p-6 md:p-8 shadow-lg"><!-- Customer Info -->
+       <div class="mb-6"><label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap *</label> <input type="text" id="customer-name" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-elegant focus:border-transparent transition" placeholder="Masukkan nama lengkap">
+       </div><!-- Order Summary -->
+       <div class="mb-6 p-4 bg-gray-50 rounded-2xl">
+        <h3 class="font-semibold text-gray-700 mb-3">Ringkasan Pesanan:</h3>
+        <div id="payment-items" class="space-y-2"><!-- Items will be populated here -->
+        </div>
+       </div><!-- Shipping Options -->
+       <div class="mb-6">
+        <h3 class="font-semibold text-gray-700 mb-3">Opsi Pengiriman:</h3>
+        <div class="space-y-3"><label class="flex items-center p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-primary/10 transition border-2 border-transparent has-[:checked]:border-elegant"> <input type="radio" name="shipping" value="regular" data-cost="15000" class="mr-3" checked onchange="updatePaymentTotal()">
+          <div class="flex-1"><span class="font-medium">Regular (3-5 hari)</span> <span class="text-elegant ml-2">Rp 15.000</span>
+          </div></label> <label class="flex items-center p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-primary/10 transition border-2 border-transparent has-[:checked]:border-elegant"> <input type="radio" name="shipping" value="express" data-cost="25000" class="mr-3" onchange="updatePaymentTotal()">
+          <div class="flex-1"><span class="font-medium">Express (1-2 hari)</span> <span class="text-elegant ml-2">Rp 25.000</span>
+          </div></label> <label class="flex items-center p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-primary/10 transition border-2 border-transparent has-[:checked]:border-elegant"> <input type="radio" name="shipping" value="sameday" data-cost="40000" class="mr-3" onchange="updatePaymentTotal()">
+          <div class="flex-1"><span class="font-medium">Same Day (hari ini)</span> <span class="text-elegant ml-2">Rp 40.000</span>
+          </div></label>
+        </div>
+       </div><!-- Payment Method -->
+       <div class="mb-6">
+        <h3 class="font-semibold text-gray-700 mb-3">Metode Pembayaran:</h3>
+        <div class="space-y-3"><label class="flex items-center p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-primary/10 transition border-2 border-transparent has-[:checked]:border-elegant"> <input type="radio" name="payment" value="transfer" class="mr-3" checked> <span class="font-medium">🏦 Transfer Bank</span> </label> <label class="flex items-center p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-primary/10 transition border-2 border-transparent has-[:checked]:border-elegant"> <input type="radio" name="payment" value="ewallet" class="mr-3"> <span class="font-medium">📱 E-Wallet (OVO/GoPay/Dana)</span> </label> <label class="flex items-center p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-primary/10 transition border-2 border-transparent has-[:checked]:border-elegant"> <input type="radio" name="payment" value="cod" class="mr-3"> <span class="font-medium">💵 COD (Bayar di Tempat)</span> </label>
+        </div>
+       </div><!-- Payment Summary -->
+       <div class="border-t pt-6 mb-6">
+        <h3 class="font-semibold text-gray-700 mb-4">Rincian Pembayaran:</h3>
+        <div class="space-y-2 text-sm">
+         <div class="flex justify-between"><span class="text-gray-600">Subtotal Produk</span> <span id="payment-subtotal">Rp 0</span>
+         </div>
+         <div class="flex justify-between"><span class="text-gray-600">Ongkos Kirim</span> <span id="payment-shipping">Rp 15.000</span>
+         </div>
+         <div class="flex justify-between text-lg font-bold pt-2 border-t"><span>Total Bayar</span> <span id="payment-total" class="text-elegant">Rp 0</span>
+         </div>
+        </div>
+       </div><!-- Confirm Button --> <button onclick="confirmPayment()" class="w-full py-4 bg-elegant text-white rounded-full font-medium hover:bg-elegant/90 transition shadow-lg text-lg"> ✓ Konfirmasi Pembayaran </button>
+       <p class="text-center text-gray-500 text-sm mt-4">⚠️ Ini adalah demo. Pembayaran tidak diproses secara nyata.</p>
+      </div>
+     </div>
+    </section><!-- OWNER PAGE -->
+    <section id="page-owner" class="page-section hidden">
+     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <h1 class="text-3xl md:text-4xl font-display font-bold text-elegant text-center mb-4">👑 Owner Dashboard</h1>
+      <p class="text-gray-600 text-center mb-10">Kelola stok, harga, dan lihat riwayat transaksi</p><!-- Quick Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+       <div class="bg-white rounded-2xl p-5 shadow-md text-center">
+        <p class="text-3xl font-bold text-elegant" id="stat-products">4</p>
+        <p class="text-gray-500 text-sm">Total Produk</p>
+       </div>
+       <div class="bg-white rounded-2xl p-5 shadow-md text-center">
+        <p class="text-3xl font-bold text-green-500" id="stat-sold">0</p>
+        <p class="text-gray-500 text-sm">Terjual</p>
+       </div>
+       <div class="bg-white rounded-2xl p-5 shadow-md text-center">
+        <p class="text-3xl font-bold text-blue-500" id="stat-orders">0</p>
+        <p class="text-gray-500 text-sm">Pesanan</p>
+       </div>
+       <div class="bg-white rounded-2xl p-5 shadow-md text-center">
+        <p class="text-3xl font-bold text-orange-500" id="stat-returns">0</p>
+        <p class="text-gray-500 text-sm">Retur</p>
+       </div>
+      </div><!-- Manage Products -->
+      <div class="bg-white rounded-3xl p-6 md:p-8 shadow-lg mb-8">
+       <h2 class="text-xl font-display font-semibold text-elegant mb-6">📦 Kelola Produk</h2>
+       <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+         <thead>
+          <tr class="border-b">
+           <th class="text-left py-3 px-2">Produk</th>
+           <th class="text-left py-3 px-2">Harga</th>
+           <th class="text-left py-3 px-2">Stok Total</th>
+           <th class="text-left py-3 px-2">Aksi</th>
+          </tr>
+         </thead>
+         <tbody id="owner-products-table"><!-- Products will be populated here -->
+         </tbody>
+        </table>
+       </div>
+      </div><!-- Transaction History -->
+      <div class="bg-white rounded-3xl p-6 md:p-8 shadow-lg mb-8">
+       <h2 class="text-xl font-display font-semibold text-elegant mb-6">📊 Riwayat Transaksi</h2>
+       <div class="flex flex-wrap gap-3 mb-6"><button onclick="filterTransactions('all')" class="px-4 py-2 bg-elegant text-white rounded-full text-sm transition" id="filter-all">Semua</button> <button onclick="filterTransactions('sold')" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-elegant hover:text-white transition" id="filter-sold">Terjual</button> <button onclick="filterTransactions('pending')" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-elegant hover:text-white transition" id="filter-pending">Pending</button> <button onclick="filterTransactions('returned')" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-elegant hover:text-white transition" id="filter-returned">Retur</button>
+       </div>
+       <div id="transaction-list" class="space-y-3 max-h-96 overflow-y-auto">
+        <p class="text-gray-500 text-center py-8">Belum ada transaksi</p>
+       </div><!-- Spreadsheet Link -->
+       <div class="mt-6 p-4 bg-gray-50 rounded-xl">
+        <p class="text-sm text-gray-600 mb-2">📄 Data transaksi tersimpan di Canva Sheet dan dapat dilihat melalui tombol Data di atas.</p>
+        <p class="text-xs text-gray-400">Data akan otomatis terupdate sesuai aktivitas jual, beli, dan retur.</p>
+       </div>
+      </div><!-- Stock Management Modal -->
+      <div id="stock-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+       <div class="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full max-h-[90%] overflow-y-auto">
+        <h3 class="text-xl font-display font-semibold text-elegant mb-6">Edit Stok &amp; Harga</h3>
+        <div id="stock-modal-content"><!-- Content will be populated -->
+        </div>
+        <div class="flex gap-3 mt-6"><button onclick="closeStockModal()" class="flex-1 py-3 border border-gray-200 rounded-full hover:bg-gray-50 transition">Batal</button> <button onclick="saveStockChanges()" class="flex-1 py-3 bg-elegant text-white rounded-full hover:bg-elegant/90 transition">Simpan</button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-full shadow-lg hidden z-50 transition-all duration-300"><span id="toast-message">Pesan</span>
+    </div>
+   </main>
+  </div>
+  <script>
+    // ===================== PRODUCT DATA =====================
+    const productsData = {
+      'hijab-sport': {
+        id: 'hijab-sport',
+        name: 'Hijab Sport',
+        price: 40000,
+        image: 'image/hijab-sport.jpeg',
+        emoji: '🧕',
+        description: 'Hijab Sport adalah pilihan sempurna untuk kamu yang aktif dan suka berolahraga. Terbuat dari bahan premium yang breathable, quick dry, dan super nyaman dipakai saat beraktivitas. Desainnya yang sporty namun tetap syar\'i membuatmu bisa tampil percaya diri di gym, jogging, atau aktivitas outdoor lainnya. Dilengkapi dengan inner built-in yang anti geser, sehingga hijab tetap rapi meski kamu bergerak aktif.',
+        colors: {
+          'Hitam': 25, 'Putih': 30, 'Navy': 20, 'Abu-abu': 15, 'Pink Dusty': 18,
+          'Sage Green': 22, 'Maroon': 12, 'Mustard': 10, 'Mocca': 28, 'Biru Muda': 16,
+          'Ungu': 8, 'Coral': 14, 'Olive': 20, 'Cream': 25, 'Tosca': 11
+        },
+        reviews: [
+          { name: 'Aisyah', rating: 5, text: 'Bagus banget! Nyaman dipakai olahraga, ga gerah sama sekali.' },
+          { name: 'Fatimah', rating: 5, text: 'Bahannya adem, cepat kering. Recommended!' },
+          { name: 'Khadijah', rating: 4, text: 'Suka warnanya, jahitan rapi. Pengiriman cepat.' },
+          { name: 'Maryam', rating: 5, text: 'Sudah beli 3x, selalu puas. Kualitas terbaik!' }
+        ]
+      },
+      'segiempat-voal': {
+        id: 'segiempat-voal',
+        name: 'Hijab Segi Empat Voal',
+        price: 35000,
+        image: 'image/segiempat-voal.jpeg',
+        emoji: '🧣',
+        description: 'Hijab Segi Empat Voal Premium dengan bahan voal super lembut dan adem. Ukuran jumbo 120x120cm yang memudahkan berbagai style hijab. Pinggiran laser cut yang rapi dan tidak mudah rusak. Bahan tidak transparan, jatuh sempurna, dan mudah dibentuk. Cocok untuk acara formal maupun sehari-hari. Warna tidak luntur meski dicuci berkali-kali.',
+        colors: {
+          'Hitam': 40, 'Putih': 35, 'Navy': 28, 'Burgundy': 20, 'Sage': 25,
+          'Dusty Pink': 30, 'Lavender': 18, 'Mocca': 32, 'Cream': 38, 'Army': 15,
+          'Teal': 12, 'Rose Gold': 22, 'Peach': 26, 'Denim': 19, 'Mauve': 14,
+          'Terracotta': 10, 'Lilac': 16, 'Mint': 21, 'Coral': 13, 'Grey': 27
+        },
+        reviews: [
+          { name: 'Zahra', rating: 5, text: 'Voalnya premium banget, jatuhnya bagus!' },
+          { name: 'Salma', rating: 5, text: 'Warna sesuai foto, bahan adem. Love it!' },
+          { name: 'Hana', rating: 4, text: 'Bagus, tapi pengiriman agak lama. Overall puas.' },
+          { name: 'Nisa', rating: 5, text: 'Best seller emang ga pernah mengecewakan!' }
+        ]
+      },
+      'pashmina-viscose': {
+        id: 'pashmina-viscose',
+        name: 'Hijab Pashmina Viscose',
+        price: 45000,
+        image: 'image/pashmina-viscose.jpeg',
+        emoji: '✨',
+        description: 'Pashmina Viscose adalah pilihan elegan untuk penampilan sehari-hari hingga acara spesial. Bahan viscose premium yang super lembut, jatuh sempurna, dan mudah dibentuk dalam berbagai style. Ukuran panjang 175x75cm memberikan coverage yang maksimal. Tidak kusut, tidak mudah berbulu, dan nyaman dipakai seharian. Pilihan warna yang beragam cocok untuk mix and match dengan berbagai outfit.',
+        colors: {
+          'Black': 45, 'White': 40, 'Navy Blue': 35, 'Maroon': 28, 'Sage Green': 32,
+          'Dusty Pink': 38, 'Mocca': 42, 'Cream': 50, 'Army': 25, 'Burgundy': 22,
+          'Mauve': 18, 'Olive': 30, 'Terracotta': 15, 'Lilac': 20, 'Denim Blue': 26,
+          'Rose': 24, 'Toffee': 19, 'Plum': 12, 'Copper': 16, 'Sand': 35
+        },
+        reviews: [
+          { name: 'Amira', rating: 5, text: 'Viscosenya lembut banget, jatuhnya perfect!' },
+          { name: 'Safira', rating: 5, text: 'Sudah repeat order berkali-kali, kualitas konsisten.' },
+          { name: 'Nabila', rating: 4, text: 'Bagus, warna cantik. Packing aman.' },
+          { name: 'Rania', rating: 5, text: 'Worth the price! Bahan premium, jahitan rapi.' }
+        ]
+      },
+      'pashmina-ceruty': {
+        id: 'pashmina-ceruty',
+        name: 'Hijab Pashmina Ceruty',
+        price: 42000,
+        image: 'image/pashmina-ceruty.jpeg',
+        emoji: '💎',
+        description: 'Pashmina Ceruty Babydoll adalah pilihan elegan untuk acara formal dan semi-formal. Bahan ceruty babydoll yang halus, tidak mudah kusut, dan memiliki sedikit kilau yang cantik. Ukuran 175x75cm dengan pinggiran obras yang rapi. Jatuh sempurna dan mudah dibentuk. Cocok untuk kondangan, acara kantor, atau penampilan sehari-hari yang lebih dressed up.',
+        colors: {
+          'Hitam': 50, 'Putih': 45, 'Navy': 38, 'Maroon': 30, 'Emerald': 25,
+          'Dusty Pink': 42, 'Gold': 20, 'Silver': 18, 'Mocca': 48, 'Cream': 55,
+          'Burgundy': 28, 'Royal Blue': 22, 'Champagne': 35, 'Rose Gold': 26, 'Plum': 15,
+          'Teal': 19, 'Copper': 12, 'Pewter': 14, 'Blush': 32, 'Sage': 24
+        },
+        reviews: [
+          { name: 'Diana', rating: 5, text: 'Perfect untuk kondangan! Kilaunya cantik, tidak norak.' },
+          { name: 'Layla', rating: 5, text: 'Bahan premium, jatuhnya bagus banget.' },
+          { name: 'Yasmin', rating: 4, text: 'Suka! Warna sesuai ekspektasi.' },
+          { name: 'Siti', rating: 5, text: 'Elegant dan syar\'i. Recommended seller!' }
+        ]
+      }
+    };
+
+    // ===================== STATE MANAGEMENT =====================
+    let cart = [];
+    let currentProduct = null;
+    let selectedColor = null;
+    let quantity = 1;
+    let transactions = [];
+    let currentEditProduct = null;
+    let previousPage = 'home';
+    let paymentItems = [];
+
+    // Quiz states
+    let undertoneAnswers = [];
+    let faceAnswers = [];
+
+    // Default config for SDK
+    const defaultConfig = {
+      store_name: 'Heavenly Wear',
+      tagline: 'Elegant Hijab for Every Woman',
+      primary_color: '#F8BBD9',
+      secondary_color: '#E8B4D4',
+      text_color: '#4A4A4A',
+      accent_color: '#A7C7E7',
+      elegant_color: '#9B6B8E',
+      font_family: 'Playfair Display'
+    };
+
+    // ===================== SDK INITIALIZATION =====================
+    const dataHandler = {
+      onDataChanged(data) {
+        transactions = data.filter(d => d.type === 'transaction');
+        updateOwnerStats();
+        renderTransactionList();
+      }
+    };
+
+    async function initializeApp() {
+      // Initialize Element SDK
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            document.documentElement.style.setProperty('--color-elegant', config.elegant_color || defaultConfig.elegant_color);
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              { get: () => config.primary_color || defaultConfig.primary_color, set: (v) => window.elementSdk.setConfig({ primary_color: v }) },
+              { get: () => config.secondary_color || defaultConfig.secondary_color, set: (v) => window.elementSdk.setConfig({ secondary_color: v }) },
+              { get: () => config.text_color || defaultConfig.text_color, set: (v) => window.elementSdk.setConfig({ text_color: v }) },
+              { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => window.elementSdk.setConfig({ accent_color: v }) },
+              { get: () => config.elegant_color || defaultConfig.elegant_color, set: (v) => window.elementSdk.setConfig({ elegant_color: v }) }
+            ],
+            borderables: [],
+            fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => window.elementSdk.setConfig({ font_family: v }) },
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ['store_name', config.store_name || defaultConfig.store_name],
+            ['tagline', config.tagline || defaultConfig.tagline]
+          ])
+        });
+      }
+
+      // Initialize Data SDK
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+          console.error('Failed to initialize Data SDK');
+        }
+      }
+
+      // Initialize UI
+      updateCartCount();
+      renderOwnerProducts();
+    }
+
+    initializeApp();
+
+    // ===================== NAVIGATION =====================
+    function navigateTo(page) {
+      previousPage = getCurrentPage();
+      document.querySelectorAll('.page-section').forEach(p => p.classList.add('hidden'));
+      const targetPage = document.getElementById(`page-${page}`);
+      if (targetPage) {
+        targetPage.classList.remove('hidden');
+        window.scrollTo(0, 0);
+      }
+      
+      if (page === 'cart') updateCartPage();
+      if (page === 'owner') {
+        renderOwnerProducts();
+        updateOwnerStats();
+      }
+    }
+
+    function getCurrentPage() {
+      const visible = document.querySelector('.page-section:not(.hidden)');
+      return visible ? visible.id.replace('page-', '') : 'home';
+    }
+
+    function navigateBack() {
+      navigateTo(previousPage);
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    // ===================== PRODUCT DETAIL =====================
+    function showProductDetail(productId) {
+      currentProduct = productsData[productId];
+      if (!currentProduct) return;
+
+      navigateTo('product-detail');
+      
+      // Update product info
+      document.getElementById('product-title').textContent = currentProduct.name;
+      document.getElementById('product-price').textContent = `Rp ${currentProduct.price.toLocaleString('id-ID')}`;
+      document.getElementById('product-description').textContent = currentProduct.description;
+      
+      // Update image
+      const imageContainer = document.getElementById('product-image-container');
+      imageContainer.innerHTML = `<img src="${currentProduct.image}" alt="${currentProduct.name}" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'text-8xl\\'>${currentProduct.emoji}</span>';">`;
+      
+      // Reset selection
+      selectedColor = null;
+      quantity = 1;
+      document.getElementById('quantity-display').textContent = '1';
+      
+      // Render colors
+      renderColorOptions();
+      
+      // Render reviews
+      renderReviews();
+    }
+
+    function renderColorOptions() {
+      const container = document.getElementById('color-options');
+      container.innerHTML = '';
+      
+      const colors = Object.entries(currentProduct.colors);
+      colors.forEach(([color, stock]) => {
+        const colorCode = getColorCode(color);
+        const btn = document.createElement('button');
+        btn.className = `px-4 py-2 rounded-full border-2 transition text-sm ${stock > 0 ? 'hover:border-elegant' : 'opacity-50 cursor-not-allowed'} ${selectedColor === color ? 'border-elegant bg-elegant/10' : 'border-gray-200'}`;
+        btn.innerHTML = `<span class="inline-block w-3 h-3 rounded-full mr-2" style="background:${colorCode}"></span>${color} (${stock})`;
+        btn.disabled = stock <= 0;
+        btn.onclick = () => selectColor(color, stock);
+        container.appendChild(btn);
+      });
+      
+      updateStockInfo();
+    }
+
+    function selectColor(color, stock) {
+      if (stock <= 0) return;
+      selectedColor = color;
+      quantity = 1;
+      document.getElementById('quantity-display').textContent = '1';
+      renderColorOptions();
+      updateStockInfo();
+    }
+
+    function updateStockInfo() {
+      const stockInfo = document.getElementById('stock-info');
+      const stockCount = document.getElementById('stock-count');
+      
+      if (selectedColor) {
+        const stock = currentProduct.colors[selectedColor];
+        stockCount.textContent = stock;
+        stockInfo.className = stock > 0 ? 'mb-6 p-4 bg-green-50 rounded-xl' : 'mb-6 p-4 bg-red-50 rounded-xl';
+        stockInfo.innerHTML = stock > 0 
+          ? `<p class="text-green-600 font-medium">✓ Stok ${selectedColor} tersedia: ${stock} pcs</p>`
+          : `<p class="text-red-600 font-medium">✗ Stok ${selectedColor} habis</p>`;
+      } else {
+        const totalStock = Object.values(currentProduct.colors).reduce((a, b) => a + b, 0);
+        stockCount.textContent = totalStock;
+        stockInfo.innerHTML = `<p class="text-gray-600 font-medium">📦 Total stok tersedia: ${totalStock} pcs</p>`;
+      }
+    }
+
+    function getColorCode(colorName) {
+      const colorMap = {
+        'Hitam': '#000000', 'Black': '#000000', 'Putih': '#FFFFFF', 'White': '#FFFFFF',
+        'Navy': '#001F3F', 'Navy Blue': '#001F3F', 'Abu-abu': '#808080', 'Grey': '#808080',
+        'Pink Dusty': '#D4A5A5', 'Dusty Pink': '#D4A5A5', 'Sage Green': '#9DC183', 'Sage': '#9DC183',
+        'Maroon': '#800000', 'Burgundy': '#800020', 'Mustard': '#FFDB58', 'Mocca': '#967969',
+        'Biru Muda': '#ADD8E6', 'Ungu': '#800080', 'Coral': '#FF7F50', 'Olive': '#808000',
+        'Cream': '#FFFDD0', 'Tosca': '#008080', 'Teal': '#008080', 'Lavender': '#E6E6FA',
+        'Army': '#4B5320', 'Rose Gold': '#B76E79', 'Peach': '#FFCBA4', 'Denim': '#1560BD',
+        'Denim Blue': '#1560BD', 'Mauve': '#E0B0FF', 'Terracotta': '#E2725B', 'Lilac': '#C8A2C8',
+        'Mint': '#98FF98', 'Emerald': '#50C878', 'Gold': '#FFD700', 'Silver': '#C0C0C0',
+        'Royal Blue': '#4169E1', 'Champagne': '#F7E7CE', 'Plum': '#8E4585', 'Copper': '#B87333',
+        'Pewter': '#8F9779', 'Blush': '#DE5D83', 'Rose': '#FF007F', 'Toffee': '#755139',
+        'Sand': '#C2B280'
+      };
+      return colorMap[colorName] || '#9B6B8E';
+    }
+
+    function renderReviews() {
+      const container = document.getElementById('product-reviews');
+      container.innerHTML = currentProduct.reviews.map(review => `
+        <div class="bg-gray-50 rounded-xl p-4">
+          <div class="flex items-center mb-2">
+            <span class="font-medium text-gray-800">${review.name}</span>
+            <span class="ml-2 text-yellow-400">${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}</span>
+          </div>
+          <p class="text-gray-600 text-sm">${review.text}</p>
+        </div>
+      `).join('');
+    }
+
+    function increaseQuantity() {
+      if (!selectedColor) {
+        showToast('Pilih warna terlebih dahulu');
+        return;
+      }
+      const maxStock = currentProduct.colors[selectedColor];
+      if (quantity < maxStock) {
+        quantity++;
+        document.getElementById('quantity-display').textContent = quantity;
+      } else {
+        showToast('Stok tidak mencukupi');
+      }
+    }
+
+    function decreaseQuantity() {
+      if (quantity > 1) {
+        quantity--;
+        document.getElementById('quantity-display').textContent = quantity;
+      }
+    }
+
+    // ===================== CART FUNCTIONS =====================
+    function addToCart() {
+      if (!selectedColor) {
+        showToast('Pilih warna terlebih dahulu');
+        return;
+      }
+      
+      const existingItem = cart.find(item => item.productId === currentProduct.id && item.color === selectedColor);
+      
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        cart.push({
+          productId: currentProduct.id,
+          name: currentProduct.name,
+          price: currentProduct.price,
+          color: selectedColor,
+          quantity: quantity,
+          checked: true
+        });
+      }
+      
+      updateCartCount();
+      showToast('Produk ditambahkan ke keranjang! 🛒');
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const countEl = document.getElementById('cart-count');
+      if (count > 0) {
+        countEl.textContent = count;
+        countEl.classList.remove('hidden');
+      } else {
+        countEl.classList.add('hidden');
+      }
+    }
+
+    function updateCartPage() {
+      const emptyEl = document.getElementById('cart-empty');
+      const itemsEl = document.getElementById('cart-items');
+      const summaryEl = document.getElementById('cart-summary');
+      
+      if (cart.length === 0) {
+        emptyEl.classList.remove('hidden');
+        itemsEl.innerHTML = '';
+        summaryEl.classList.add('hidden');
+      } else {
+        emptyEl.classList.add('hidden');
+        summaryEl.classList.remove('hidden');
+        renderCartItems();
+        updateCartSubtotal();
+      }
+    }
+
+    function renderCartItems() {
+      const container = document.getElementById('cart-items');
+      container.innerHTML = cart.map((item, index) => `
+        <div class="bg-white rounded-2xl p-4 shadow-md flex items-center gap-4 fade-in">
+          <input type="checkbox" ${item.checked ? 'checked' : ''} onchange="toggleCartItem(${index})" class="w-5 h-5 accent-elegant">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center flex-shrink-0">
+            <span class="text-2xl">${productsData[item.productId].emoji}</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="font-medium text-gray-800 truncate">${item.name}</h3>
+            <p class="text-sm text-gray-500">Warna: ${item.color}</p>
+            <p class="text-elegant font-semibold">Rp ${item.price.toLocaleString('id-ID')}</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="updateCartQty(${index}, -1)" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200">−</button>
+            <span class="w-8 text-center font-medium">${item.quantity}</span>
+            <button onclick="updateCartQty(${index}, 1)" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200">+</button>
+          </div>
+          <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-600 p-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function toggleCartItem(index) {
+      cart[index].checked = !cart[index].checked;
+      updateCartSubtotal();
+    }
+
+    function updateCartQty(index, delta) {
+      const newQty = cart[index].quantity + delta;
+      if (newQty < 1) return;
+      
+      const product = productsData[cart[index].productId];
+      const maxStock = product.colors[cart[index].color];
+      
+      if (newQty > maxStock) {
+        showToast('Stok tidak mencukupi');
+        return;
+      }
+      
+      cart[index].quantity = newQty;
+      renderCartItems();
+      updateCartSubtotal();
+      updateCartCount();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartCount();
+      updateCartPage();
+      showToast('Produk dihapus dari keranjang');
+    }
+
+    function updateCartSubtotal() {
+      const subtotal = cart.filter(item => item.checked).reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      document.getElementById('cart-subtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+    }
+
+    // ===================== CHECKOUT & PAYMENT =====================
+    function buyNow() {
+      if (!selectedColor) {
+        showToast('Pilih warna terlebih dahulu');
+        return;
+      }
+      
+      paymentItems = [{
+        productId: currentProduct.id,
+        name: currentProduct.name,
+        price: currentProduct.price,
+        color: selectedColor,
+        quantity: quantity
+      }];
+      
+      previousPage = 'product-detail';
+      navigateTo('payment');
+      renderPaymentItems();
+      updatePaymentTotal();
+    }
+
+    function checkoutSelected() {
+      const selectedItems = cart.filter(item => item.checked);
+      if (selectedItems.length === 0) {
+        showToast('Pilih produk yang ingin di-checkout');
+        return;
+      }
+      
+      paymentItems = [...selectedItems];
+      previousPage = 'cart';
+      navigateTo('payment');
+      renderPaymentItems();
+      updatePaymentTotal();
+    }
+
+    function renderPaymentItems() {
+      const container = document.getElementById('payment-items');
+      container.innerHTML = paymentItems.map(item => `
+        <div class="flex justify-between text-sm">
+          <span>${item.name} (${item.color}) x${item.quantity}</span>
+          <span>Rp ${(item.price * item.quantity).toLocaleString('id-ID')}</span>
+        </div>
+      `).join('');
+    }
+
+    function updatePaymentTotal() {
+      const subtotal = paymentItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const shippingEl = document.querySelector('input[name="shipping"]:checked');
+      const shippingCost = shippingEl ? parseInt(shippingEl.dataset.cost) : 15000;
+      const total = subtotal + shippingCost;
+      
+      document.getElementById('payment-subtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+      document.getElementById('payment-shipping').textContent = `Rp ${shippingCost.toLocaleString('id-ID')}`;
+      document.getElementById('payment-total').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+    }
+
+    async function confirmPayment() {
+      const customerName = document.getElementById('customer-name').value.trim();
+      if (!customerName) {
+        showToast('Mohon isi nama lengkap');
+        return;
+      }
+      
+      const shippingEl = document.querySelector('input[name="shipping"]:checked');
+      const paymentEl = document.querySelector('input[name="payment"]:checked');
+      const shippingCost = parseInt(shippingEl.dataset.cost);
+      const subtotal = paymentItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const total = subtotal + shippingCost;
+      
+      // Save transaction
+      for (const item of paymentItems) {
+        const transaction = {
+          type: 'transaction',
+          product_id: item.productId,
+          product_name: item.name,
+          color: item.color,
+          quantity: item.quantity,
+          price: item.price,
+          customer_name: customerName,
+          shipping_option: shippingEl.value,
+          shipping_cost: shippingCost,
+          payment_method: paymentEl.value,
+          total: total,
+          status: 'sold',
+          created_at: new Date().toISOString()
+        };
+        
+        if (window.dataSdk) {
+          const result = await window.dataSdk.create(transaction);
+          if (!result.isOk) {
+            showToast('Gagal menyimpan transaksi');
+            return;
+          }
+        }
+        
+        // Update stock
+        if (productsData[item.productId]) {
+          productsData[item.productId].colors[item.color] -= item.quantity;
+        }
+      }
+      
+      // Remove items from cart if from cart checkout
+      if (previousPage === 'cart') {
+        cart = cart.filter(item => !item.checked);
+        updateCartCount();
+      }
+      
+      showToast('Pesanan berhasil! Terima kasih 💕');
+      paymentItems = [];
+      
+      setTimeout(() => navigateTo('home'), 2000);
+    }
+
+    // ===================== QUIZ FUNCTIONS =====================
+    function showQuiz(type) {
+      document.querySelectorAll('.quiz-container').forEach(q => q.classList.add('hidden'));
+      document.getElementById(`quiz-${type}`).classList.remove('hidden');
+      
+      // Reset quiz states
+      if (type === 'undertone') {
+        undertoneAnswers = [];
+        resetQuizSteps('undertone-questions');
+        document.getElementById('undertone-result').classList.add('hidden');
+      } else if (type === 'face-shape') {
+        faceAnswers = [];
+        resetQuizSteps('face-questions');
+        document.getElementById('face-result').classList.add('hidden');
+      } else if (type === 'photo-analysis') {
+        document.getElementById('photo-preview').classList.add('hidden');
+        document.getElementById('photo-analyzing').classList.add('hidden');
+        document.getElementById('photo-result').classList.add('hidden');
+      }
+    }
+
+    function resetQuizSteps(containerId) {
+      const container = document.getElementById(containerId);
+      container.querySelectorAll('.quiz-step').forEach((step, i) => {
+        step.classList.toggle('hidden', i !== 0);
+      });
+    }
+
+    function selectUndertone(step, answer) {
+      undertoneAnswers.push(answer);
+      
+      if (step < 3) {
+        const currentStep = document.querySelector(`#undertone-questions .quiz-step[data-step="${step}"]`);
+        const nextStep = document.querySelector(`#undertone-questions .quiz-step[data-step="${step + 1}"]`);
+        currentStep.classList.add('hidden');
+        nextStep.classList.remove('hidden');
+      } else {
+        showUndertoneResult();
+      }
+    }
+
+    function showUndertoneResult() {
+      const counts = { warm: 0, cool: 0, neutral: 0 };
+      undertoneAnswers.forEach(a => counts[a]++);
+      
+      let result, colors;
+      if (counts.warm >= 2) {
+        result = 'Warm (Hangat)';
+        colors = ['Kuning', 'Orange', 'Merah bata', 'Coklat', 'Gold', 'Peach', 'Coral', 'Mustard', 'Olive', 'Terracotta'];
+      } else if (counts.cool >= 2) {
+        result = 'Cool (Dingin)';
+        colors = ['Pink', 'Ungu', 'Biru', 'Silver', 'Abu-abu', 'Lavender', 'Magenta', 'Plum', 'Navy', 'Emerald'];
+      } else {
+        result = 'Neutral (Netral)';
+        colors = ['Semua warna cocok!', 'Cream', 'Mocca', 'Dusty Pink', 'Sage', 'Mauve', 'Teal', 'Rose', 'Burgundy'];
+      }
+      
+      document.getElementById('undertone-result-content').innerHTML = `
+        <p class="text-lg font-semibold text-elegant mb-3">Undertone kamu: ${result}</p>
+        <p class="mb-4">Warna hijab yang cocok untukmu:</p>
+        <div class="flex flex-wrap gap-2">
+          ${colors.map(c => `<span class="px-3 py-1 bg-white rounded-full text-sm text-gray-700">${c}</span>`).join('')}
+        </div>
+        <button onclick="navigateTo('catalog')" class="mt-6 px-6 py-3 bg-elegant text-white rounded-full font-medium hover:bg-elegant/90 transition">
+          Lihat Koleksi Hijab →
+        </button>
+      `;
+      document.getElementById('undertone-result').classList.remove('hidden');
+    }
+
+    function selectFaceShape(step, answer) {
+      faceAnswers.push(answer);
+      
+      if (step < 2) {
+        const currentStep = document.querySelector(`#face-questions .quiz-step[data-step="${step}"]`);
+        const nextStep = document.querySelector(`#face-questions .quiz-step[data-step="${step + 1}"]`);
+        currentStep.classList.add('hidden');
+        nextStep.classList.remove('hidden');
+      } else {
+        showFaceShapeResult();
+      }
+    }
+
+    function showFaceShapeResult() {
+      const counts = {};
+      faceAnswers.forEach(a => counts[a] = (counts[a] || 0) + 1);
+      
+      let maxCount = 0, result = 'oval';
+      for (const [shape, count] of Object.entries(counts)) {
+        if (count > maxCount) {
+          maxCount = count;
+          result = shape;
+        }
+      }
+      
+      const recommendations = {
+        'oval': { name: 'Oval', desc: 'Wajah oval cocok dengan hampir semua jenis hijab! Kamu beruntung!', products: ['Semua jenis hijab', 'Pashmina', 'Segi Empat', 'Hijab Sport'] },
+        'round': { name: 'Bulat', desc: 'Pilih hijab dengan style yang memberikan kesan lebih panjang pada wajah.', products: ['Pashmina Viscose', 'Pashmina Ceruty', 'Style ninja dengan layer'] },
+        'square': { name: 'Kotak', desc: 'Hijab dengan draping lembut akan menyamarkan garis rahang yang tegas.', products: ['Pashmina Viscose', 'Segi Empat Voal dengan style loose', 'Turban style'] },
+        'heart': { name: 'Hati', desc: 'Pilih style yang memberikan volume di area dagu untuk keseimbangan.', products: ['Segi Empat Voal', 'Pashmina dengan lilit di bawah', 'Style layer'] },
+        'oblong': { name: 'Panjang', desc: 'Hindari style yang terlalu panjang. Pilih yang memberikan volume di samping.', products: ['Segi Empat Voal', 'Hijab Sport', 'Style dengan ciput ninja'] }
+      };
+      
+      const rec = recommendations[result];
+      document.getElementById('face-result-content').innerHTML = `
+        <p class="text-lg font-semibold text-elegant mb-3">Bentuk wajahmu: ${rec.name}</p>
+        <p class="mb-4">${rec.desc}</p>
+        <p class="font-medium mb-2">Rekomendasi hijab:</p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          ${rec.products.map(p => `<span class="px-3 py-1 bg-white rounded-full text-sm text-gray-700">${p}</span>`).join('')}
+        </div>
+        <button onclick="navigateTo('catalog')" class="mt-4 px-6 py-3 bg-elegant text-white rounded-full font-medium hover:bg-elegant/90 transition">
+          Lihat Koleksi Hijab →
+        </button>
+      `;
+      document.getElementById('face-result').classList.remove('hidden');
+    }
+
+    // ===================== PHOTO ANALYSIS =====================
+    function handlePhotoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('preview-image').src = e.target.result;
+        document.getElementById('photo-preview').classList.remove('hidden');
+        document.getElementById('photo-analyzing').classList.remove('hidden');
+        document.getElementById('photo-result').classList.add('hidden');
+        
+        // Simulate AI analysis with consistent results based on image hash
+        setTimeout(() => analyzePhoto(e.target.result), 2000);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function analyzePhoto(imageData) {
+      // Create consistent hash from image data for reproducible results
+      let hash = 0;
+      for (let i = 0; i < Math.min(imageData.length, 1000); i++) {
+        hash = ((hash << 5) - hash) + imageData.charCodeAt(i);
+        hash = hash & hash;
+      }
+      
+      // Use hash to determine consistent results
+      const undertoneIndex = Math.abs(hash) % 3;
+      const faceIndex = Math.abs(hash >> 8) % 5;
+      
+      const undertones = [
+        { type: 'Warm (Hangat)', colors: ['Gold', 'Mustard', 'Coral', 'Peach', 'Terracotta', 'Olive'] },
+        { type: 'Cool (Dingin)', colors: ['Pink', 'Lavender', 'Navy', 'Silver', 'Plum', 'Emerald'] },
+        { type: 'Neutral (Netral)', colors: ['Cream', 'Mocca', 'Dusty Pink', 'Sage', 'Mauve', 'Teal'] }
+      ];
+      
+      const faceShapes = [
+        { type: 'Oval', rec: 'Semua jenis hijab cocok untukmu!', products: ['Hijab Sport', 'Segi Empat Voal', 'Pashmina Viscose', 'Pashmina Ceruty'] },
+        { type: 'Bulat', rec: 'Pilih pashmina untuk kesan lebih panjang', products: ['Pashmina Viscose', 'Pashmina Ceruty'] },
+        { type: 'Kotak', rec: 'Hijab dengan draping lembut sangat cocok', products: ['Pashmina Viscose', 'Segi Empat Voal'] },
+        { type: 'Hati', rec: 'Style dengan volume di bawah sangat cocok', products: ['Segi Empat Voal', 'Pashmina Ceruty'] },
+        { type: 'Panjang', rec: 'Pilih style dengan volume di samping', products: ['Segi Empat Voal', 'Hijab Sport'] }
+      ];
+      
+      const ut = undertones[undertoneIndex];
+      const fs = faceShapes[faceIndex];
+      
+      document.getElementById('photo-analyzing').classList.add('hidden');
+      document.getElementById('photo-result-content').innerHTML = `
+        <div class="mb-6">
+          <p class="font-semibold text-gray-700 mb-2">🎨 Undertone Kulit:</p>
+          <p class="text-elegant font-bold text-lg mb-2">${ut.type}</p>
+          <div class="flex flex-wrap gap-2">
+            ${ut.colors.map(c => `<span class="px-3 py-1 bg-white rounded-full text-sm">${c}</span>`).join('')}
+          </div>
+        </div>
+        <div class="mb-6">
+          <p class="font-semibold text-gray-700 mb-2">👤 Bentuk Wajah:</p>
+          <p class="text-elegant font-bold text-lg mb-2">${fs.type}</p>
+          <p class="text-gray-600 text-sm">${fs.rec}</p>
+        </div>
+        <div class="mb-6">
+          <p class="font-semibold text-gray-700 mb-2">✨ Rekomendasi Produk:</p>
+          <div class="space-y-2">
+            ${fs.products.map(p => `
+              <button onclick="showProductDetail('${p.toLowerCase().replace(/ /g, '-').replace('segi-empat-voal', 'segiempat-voal')}')" class="w-full text-left p-3 bg-white rounded-xl hover:bg-primary/20 transition">
+                ${p}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      document.getElementById('photo-result').classList.remove('hidden');
+    }
+
+    // ===================== OWNER FUNCTIONS =====================
+    function renderOwnerProducts() {
+      const tbody = document.getElementById('owner-products-table');
+      tbody.innerHTML = Object.values(productsData).map(product => {
+        const totalStock = Object.values(product.colors).reduce((a, b) => a + b, 0);
+        return `
+          <tr class="border-b hover:bg-gray-50">
+            <td class="py-3 px-2">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">${product.emoji}</span>
+                <span class="font-medium">${product.name}</span>
+              </div>
+            </td>
+            <td class="py-3 px-2">Rp ${product.price.toLocaleString('id-ID')}</td>
+            <td class="py-3 px-2">${totalStock} pcs</td>
+            <td class="py-3 px-2">
+              <button onclick="openStockModal('${product.id}')" class="px-4 py-2 bg-elegant text-white rounded-full text-sm hover:bg-elegant/90 transition">
+                Edit
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function openStockModal(productId) {
+      currentEditProduct = productsData[productId];
+      const modal = document.getElementById('stock-modal');
+      const content = document.getElementById('stock-modal-content');
+      
+      content.innerHTML = `
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Harga (Rp)</label>
+          <input type="number" id="edit-price" value="${currentEditProduct.price}" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-elegant">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Stok per Warna</label>
+          <div class="space-y-2 max-h-64 overflow-y-auto">
+            ${Object.entries(currentEditProduct.colors).map(([color, stock]) => `
+              <div class="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
+                <span class="text-sm">${color}</span>
+                <input type="number" data-color="${color}" value="${stock}" min="0" class="w-20 px-2 py-1 border border-gray-200 rounded-lg text-center text-sm">
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeStockModal() {
+      document.getElementById('stock-modal').classList.add('hidden');
+      document.getElementById('stock-modal').classList.remove('flex');
+      currentEditProduct = null;
+    }
+
+    function saveStockChanges() {
+      if (!currentEditProduct) return;
+      
+      const newPrice = parseInt(document.getElementById('edit-price').value);
+      if (newPrice > 0) {
+        currentEditProduct.price = newPrice;
+      }
+      
+      document.querySelectorAll('#stock-modal-content input[data-color]').forEach(input => {
+        const color = input.dataset.color;
+        const stock = parseInt(input.value) || 0;
+        currentEditProduct.colors[color] = stock;
+      });
+      
+      renderOwnerProducts();
+      closeStockModal();
+      showToast('Perubahan disimpan! ✓');
+    }
+
+    function updateOwnerStats() {
+      const sold = transactions.filter(t => t.status === 'sold').length;
+      const pending = transactions.filter(t => t.status === 'pending').length;
+      const returned = transactions.filter(t => t.status === 'returned').length;
+      
+      document.getElementById('stat-sold').textContent = sold;
+      document.getElementById('stat-orders').textContent = sold + pending;
+      document.getElementById('stat-returns').textContent = returned;
+    }
+
+    function renderTransactionList(filter = 'all') {
+      const container = document.getElementById('transaction-list');
+      let filtered = [...transactions];
+      
+      if (filter !== 'all') {
+        filtered = transactions.filter(t => t.status === filter);
+      }
+      
+      if (filtered.length === 0) {
+        container.innerHTML = '<p class="text-gray-500 text-center py-8">Tidak ada transaksi</p>';
+        return;
+      }
+      
+      container.innerHTML = filtered.map(t => {
+        const date = new Date(t.created_at).toLocaleDateString('id-ID');
+        const statusColors = {
+          'sold': 'bg-green-100 text-green-600',
+          'pending': 'bg-yellow-100 text-yellow-600',
+          'returned': 'bg-red-100 text-red-600'
+        };
+        return `
+          <div class="p-4 bg-gray-50 rounded-xl">
+            <div class="flex justify-between items-start mb-2">
+              <div>
+                <p class="font-medium">${t.product_name}</p>
+                <p class="text-sm text-gray-500">${t.color} x${t.quantity}</p>
+              </div>
+              <span class="px-2 py-1 rounded-full text-xs ${statusColors[t.status]}">${t.status}</span>
+            </div>
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-500">${t.customer_name} • ${date}</span>
+              <span class="font-medium text-elegant">Rp ${t.total.toLocaleString('id-ID')}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterTransactions(filter) {
+      document.querySelectorAll('[id^="filter-"]').forEach(btn => {
+        btn.className = btn.id === `filter-${filter}` 
+          ? 'px-4 py-2 bg-elegant text-white rounded-full text-sm transition'
+          : 'px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-elegant hover:text-white transition';
+      });
+      renderTransactionList(filter);
+    }
+
+    // ===================== UTILITY FUNCTIONS =====================
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').textContent = message;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d9a8725506ff932',t:'MTc3MzA2NDAwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
